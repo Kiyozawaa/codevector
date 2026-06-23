@@ -3,6 +3,8 @@ A product catalog application built with Node.js, Express, PostgreSQL and Neon.
 
 Dataset size: ~200,000 products.
 
+**Live Demo:** https://codevector-catalog.onrender.com
+
 ## Features
 - Newest-first sorting
 - Category filtering
