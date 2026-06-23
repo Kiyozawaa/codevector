@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.category {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.price {
+  color: green;
+  font-weight: bold;
+}
+
+.pagination {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+
+  font-size: 1rem;
+  cursor: pointer;
+
+  transition: transform 0.15s ease;
+}
+
+.pagination button:hover {
+  transform: translateY(-2px);
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.filters {
+  background: white;
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  border-radius: 6px;
+}
