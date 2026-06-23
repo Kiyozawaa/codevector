@@ -21,7 +21,7 @@ Dataset size: ~200,000 products.
 
 ## Setup
 1. Install dependencies
-`npm install`
+```npm install```
 
 2. Create a `.env` file
 ```
@@ -30,10 +30,10 @@ DB_URL=<your_db_connection_string>
 ```
 
 3. Seed the database
-`npm run seed`
+```npm run seed```
 
 4. Start the server
-`npm start`
+```npm start```
 
 5. Open 
-`http://localhost:8000`
+```http://localhost:8000```
