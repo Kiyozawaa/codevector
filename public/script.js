@@ -1,13 +1,23 @@
 let cursor = null;
 let products;
-let history = [];
-let category = '';
+let productCategory = '';
+let isLoading = false;
 
 const filters = document.getElementById('filters');
 const container = document.getElementById('products');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-const pageCounter = document.getElementById('page-count');
+const sentinel = document.getElementById('sentinel');
+ 
+const callBack = async (entries) => {
+  if (!entries[0].isIntersecting || isLoading) return;
+  await loadNextPage();
+};
+const options = {
+  root: null,
+  threshold: 0.5
+};
+const observer = new IntersectionObserver(callBack, options);
+observer.observe(sentinel);
+
 
 async function data() {
   const params = new URLSearchParams();
@@ -15,8 +25,8 @@ async function data() {
     params.set('id', cursor.id);
     params.set('created_at', cursor.created_at);
   }
-  if (category) {
-    params.set('category', category);
+  if (productCategory) {
+    params.set('category', productCategory);
   }
   const conn = await fetch(`/api/products?${params}`);
   products = await conn.json();
@@ -43,32 +53,23 @@ async function renderProducts() {
 }
 
 filters.addEventListener('change', async (e) => {
-  category = e.target.value;
+  productCategory = e.target.value;
   cursor = null;
   history = [];
   await loadData();
 });
 
-prevBtn.addEventListener('click', async () => {
-  cursor = history.pop();
-  await loadData();
-});
-
-nextBtn.addEventListener('click', async () => {
-  history.push(cursor);
-  cursor = products.cursor;
-  await loadData();
-});
-
 async function loadData() {
   await data();
-  container.innerHTML = '';
   await renderProducts();
-  prevBtn.disabled = history.length === 0;
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
 }
 
-await loadData();
+async function loadNextPage() {
+  isLoading = true;
+  if (products.cursor) cursor = products.cursor;
+  await loadData();
+  isLoading = false;
+  if (!products.cursor) observer.disconnect();
+}
+
+loadData();

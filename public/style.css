@@ -12,6 +12,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
+  min-height: 1000px;
 }
 
 .card {
@@ -67,9 +68,15 @@ h1 {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 .filters {
   background: white;
   padding: 0.5rem 1rem;
   margin: 1rem;
   border-radius: 6px;
+}
+
+.sentinel {
+  text-align: center;
+  color: #6f6f6f;
 }
